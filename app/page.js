@@ -1,10 +1,12 @@
 import Image from 'next/image'
-
-export default function Home() {
+import Home from '@/components/Home'
+import Products from '@/components/Products'
+export default function Product() {
   
   return (
     <main className="">
-      
+      {/* <Home/> */}
+      <Products/>
     </main>
   )
 }

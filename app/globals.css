@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 :root {
 }
 
@@ -15,4 +15,23 @@
 
 body {
   background-color: #f4f8f9;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.h-90vh {
+  height: 90vh;
+}
+
+.h-70vh {
+  height: 70vh;
+}
+
+.mark:hover {
+  mask-image: linear-gradient(to bottom, black 35%, rgba(0,0,0,0.1) 90%);
+}
+
+.category {
+  background-image: url('../assets/category\ bg.svg');
+  background-size: cover;
+
 }

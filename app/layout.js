@@ -13,9 +13,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Navbar/>
+        <hr className='mx-4'/>
         {children}
         
-        </body>
+      </body>
     </html>
   )
 }

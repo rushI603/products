@@ -21,7 +21,6 @@ const Products = () => {
     return products.length != 0 ? (
         
         <div className="flex justify-center items-center">
-            <Filters/>
             <div className='p-7 grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-y-[15px]'>
                 {products && 
                     products.map((item)=>(

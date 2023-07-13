@@ -5,17 +5,19 @@ import React from 'react'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { Rating } from '@mui/material'
-import axios from 'axios'
 import Loading from './Loading'
 import redlike from '../assets/liked.svg'
 
 const Products = () => {
     const [products, setProducts] = useState([])
-    const [liked, setLiked] = useState([])
     const load = async ()=> {
         const url = "https://fakestoreapi.com/products";
-        const {data} = await axios.get(url)
-        setProducts(data)
+        fetch(url).
+        then( responsive=> responsive.json()).then(
+            (json)=>{
+                setProducts(json)
+            }
+        )
     }
     useEffect(()=>{load()},[])
     return products.length != 0 ? (
@@ -50,7 +52,7 @@ const Products = () => {
                             
                             <div className="flex gap-4 py-[10px] px-[50px]">
                                 <Rating className='rating scale-75 w-full ' data-cell={item.rating.count} name="read-only"  value={item.rating.rate} />
-                                <div className="category ">{item.category.includes("clothing")?<div className='text-[#b03131]'>Clothing</div>:(item.category.includes("jewelery")?<div className='text-[#d2997e]'>Jewelery</div>:<div className='text-[#b164fa]'>Electronics</div>)}</div>
+                                <div className="category ">{item.category.includes("clothing")?<div className='text-[#C0C0C0] pl-[10px]'>Clothing</div>:(item.category.includes("jewelery")?<div className='text-[#d2997e] pl-[10px]'>Jewelery</div>:<div className='text-[#da2f1e] pl-[15px]'>Electronics</div>)}</div>
                             </div>
                             <a href="#" className='bg-[#97bf0d] rounded-full p-1 text-sm'>Add to cart</a>
                             

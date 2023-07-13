@@ -1,5 +1,4 @@
 import React from 'react'
-import dataFetch from '@/utils/dataFetch'
 import Image from 'next/image'
 import logo from '../assets/logo.svg'
 

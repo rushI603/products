@@ -21,6 +21,7 @@ const Products = () => {
     return products.length != 0 ? (
         
         <div className="flex justify-center items-center">
+            <Filters/>
             <div className='p-7 grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-y-[15px]'>
                 {products && 
                     products.map((item)=>(
@@ -31,7 +32,7 @@ const Products = () => {
                                 width={15}
                                 height={15}
                                 src={item.id%3?like:redlike}
-                                alt='logo image'
+                                alt='like'
                                 />
                             </div>
                             <div className="image pt-4 w-[200px] h-[200px]">

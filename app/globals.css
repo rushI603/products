@@ -33,5 +33,14 @@ body {
 .category {
   background-image: url('../assets/category\ bg.svg');
   background-size: cover;
+}
 
+.rating::after {
+  content:'('  attr(data-cell)  ")";
+  font-size: medium;
+  color: burlywood;
+}
+
+.h-100vh {
+  height: 100vh;
 }

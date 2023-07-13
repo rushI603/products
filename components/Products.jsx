@@ -10,6 +10,7 @@ import redlike from '../assets/liked.svg'
 
 const Products = () => {
     const [products, setProducts] = useState([])
+    const [liked,setLiked] = useState({})
     const load = async ()=> {
         const url = "https://fakestoreapi.com/products";
         fetch(url).
@@ -19,20 +20,28 @@ const Products = () => {
             }
         )
     }
-    useEffect(()=>{load()},[])
+    useEffect(()=>{
+        load(); 
+    },[])
+    useEffect(()=>{
+        products.forEach(({id})=>{
+            console.log(id)
+            setLiked(prev=> { return {...prev, [id]:id%3?0:1}})
+        })
+    },[products])
     return products.length != 0 ? (
         
         <div className="flex justify-center items-center">
             <div className='p-7 grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-y-[15px]'>
                 {products && 
-                    products.map((item)=>(
+                    products.map(({id, image,title,price,rating})=>(
                         <div className='relative rounded-lg w-[300px] flex flex-col justify-center items-center'>
-                            <div className='absolute top-4 left-4'>
+                            <div className='absolute top-4 left-4' onClick={()=>setLiked({...liked,[id]:!liked[[id]]})}>
                                 <Image
                                 className='rounded-full'
                                 width={15}
                                 height={15}
-                                src={item.id%3?like:redlike}
+                                src={liked[id]?redlike:like}
                                 alt='like'
                                 />
                             </div>
@@ -41,21 +50,20 @@ const Products = () => {
                                     className='bg-[#ffffff] mark border-2 w-full h-full rounded-lg aspect-[4/5]  object-contain'
                                     width={150}
                                     height={150}
-                                    src={item.image}   
+                                    src={image}   
                                     alt='product image'                     
                                 />
                             </div>
                             <div className="flex gap-4 pt-[20px] px-[50px]">
-                                <div className='font-bold text-[15px]'>{item.title.slice(0,26)}...</div>
-                                <div className='font-bold text-[15px]'><sup>$</sup>{Math.floor(item.price)}{item.price%1==0?<sup>.00</sup>:<sup >{(item.price+"").substring((item.price+"").indexOf('.'))}</sup>}</div>
+                                <div className='font-bold text-[15px]'>{title.slice(0,26)}...</div>
+                                <div className='font-bold text-[15px]'><sup>$</sup>{Math.floor(price)}{price%1==0?<sup>.00</sup>:<sup >{(price+"").substring((price+"").indexOf('.'))}</sup>}</div>
                             </div>
                             
-                            <div className="flex gap-4 py-[10px] px-[50px]">
-                                <Rating className='rating scale-75 w-full ' data-cell={item.rating.count} name="read-only"  value={item.rating.rate} />
-                                <div className="category ">{item.category.includes("clothing")?<div className='text-[#C0C0C0] pl-[10px]'>Clothing</div>:(item.category.includes("jewelery")?<div className='text-[#d2997e] pl-[10px]'>Jewelery</div>:<div className='text-[#da2f1e] pl-[15px]'>Electronics</div>)}</div>
+                            <div className="flex gap-4 py-[10px] px-[50px] flex-col relative items-start w-full  ">
+                                <Rating className='rating absolute left-[-20px] scale-75' data-cell={rating.count} name="read-only"  value={rating.rate} />
+                                <a href="#" className='text-[#97bf0d] border-2 rounded-full p-1 text-sm'>Add to cart</a>
+
                             </div>
-                            <a href="#" className='bg-[#97bf0d] rounded-full p-1 text-sm'>Add to cart</a>
-                            
                         </div>
                     ))
                 }

@@ -26,6 +26,8 @@ body {
   height: 70vh;
 }
 
+
+
 .mark:hover {
   mask-image: linear-gradient(to bottom, black 35%, rgba(0,0,0,0.1) 90%);
 }

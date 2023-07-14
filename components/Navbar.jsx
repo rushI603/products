@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className='flex gap-x-4'>
         <div className='text-[#00a096] text-[15px]'>
           <Image
-            className='inline'
+            className='inline mr-2'
             width={20}
             height={20}
             src={user}
@@ -28,7 +28,7 @@ const Navbar = () => {
           Account</div>
         <div className='text-[#00a096] text-[15px]'>
           <Image
-            className='inline'
+            className='inline mr-2'
             width={20}
             height={20}
             src={cart}

@@ -26,7 +26,6 @@ const Products = () => {
 
     function check (category) {
         const tempFilters = Object.keys(selectedFilter);
-        console.log(tempFilters)
         for (let i = 0; i < tempFilters.length; i++) {
             if(selectedFilter[tempFilters[i]])
                 if(category.includes(tempFilters[i]))return true;

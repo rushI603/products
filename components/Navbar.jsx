@@ -1,6 +1,8 @@
 import React from 'react'
 import Image from 'next/image'
 import logo from '../assets/logo.svg'
+import user from '../assets/user.svg'
+import cart from '../assets/cart.svg'
 
 const Navbar = () => {
   
@@ -14,6 +16,25 @@ const Navbar = () => {
           alt='logo'
         />
         <span className='text-[#00a096]'>SN</span><span className='text-[#97bf0d]'> Silos</span>
+      </div>
+      <div className='flex gap-x-4'>
+        <div className='text-[#00a096] text-[15px]'>
+          <Image
+            className='inline'
+            width={20}
+            height={20}
+            src={user}
+          />
+          Account</div>
+        <div className='text-[#00a096] text-[15px]'>
+          <Image
+            className='inline'
+            width={20}
+            height={20}
+            src={cart}
+          />
+          Cart
+        </div>
       </div>
     </div>
   )

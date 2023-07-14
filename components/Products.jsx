@@ -12,8 +12,7 @@ import filterImage from '../assets/filter.svg'
 const Products = () => {
     const filter = ["clothing","jewelery","men","women","electronics"]
     const [products, setProducts] = useState([])
-    const [selectedFilter, setSelectedFilter] = useState(["jewelery"])
-    // const [filterObj, setFilterObj] = useState({"clothing":0,"jewelery":0,"men":0,"women":0,"electronics":0})
+    const [selectedFilter, setSelectedFilter] = useState({"clothing":1,"jewelery":1,"men":0,"women":0,"electronics":0})
     const [liked,setLiked] = useState({})
     const load = async ()=> {
         const url = "https://fakestoreapi.com/products";
@@ -26,9 +25,11 @@ const Products = () => {
     }
 
     function check (category) {
-        console.log("check called")
-        for (let i = 0; i < selectedFilter.length; i++) {
-            if(category.includes(selectedFilter[i]))return true;
+        const tempFilters = Object.keys(selectedFilter);
+        console.log(tempFilters)
+        for (let i = 0; i < tempFilters.length; i++) {
+            if(selectedFilter[tempFilters[i]])
+                if(category.includes(tempFilters[i]))return true;
         }
         return false;
     }
@@ -47,8 +48,10 @@ const Products = () => {
                 <div className="flex justify-around pt-4 w-full">
                     <div className="flex gap-x-2 ">
                         {filter.map((item)=> 
-                            <div className='bg-[#ffffff] opacity-50  text-[#97bf0d] px-2 rounded-full p-1' onClick={()=>setSelectedFilter((prev)=>[...prev,item])}>
-                                {item}
+                            <div className={selectedFilter[item]?"opacity-100":"opacity-50"}  onClick={()=>setSelectedFilter((prev)=>{return {...prev,[item]:!prev[item]}})}>
+                                <div className='bg-[#ffffff]  text-[#97bf0d] px-2 rounded-full p-1'>
+                                    {item}
+                                </div>
                             </div>
                             )}
                     </div>
@@ -64,7 +67,7 @@ const Products = () => {
                     </div>
                 </div>
                 <div className='grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-y-[15px]'>
-                    {products && selectedFilter.length==0 &&
+                    {products && !Object.values(selectedFilter).includes(1) &&
                         products.map(({id, image,title,price,rating, category})=>(
                             <div className='relative rounded-lg w-[300px] flex flex-col justify-center items-center'>
                                 <div className='absolute top-4 left-4' onClick={()=>setLiked({...liked,[id]:!liked[[id]]})}>
@@ -99,7 +102,7 @@ const Products = () => {
                         ))
                     }
                     {
-                        products && selectedFilter.length!=0 &&
+                        products && Object.values(selectedFilter).includes(1) &&
                         products.map(({id, image,title,price,rating, category})=>(
                             check(category) ?
                             <div className='relative rounded-lg w-[300px] flex flex-col justify-center items-center'>

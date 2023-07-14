@@ -11,4 +11,6 @@
 <h3>Features</h3>
 <ul>
   <li>Like</li>
+  <li>Filter (UI added and not implemented)</li>
+  
 </ul>
